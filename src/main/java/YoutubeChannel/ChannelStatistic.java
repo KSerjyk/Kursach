@@ -26,4 +26,14 @@ public class ChannelStatistic {
     public Long getVideoCount() {
         return videoCount;
     }
+
+    @Override
+    public String toString() {
+        return "Statistic:\n" +
+                "\tviewCount: " + viewCount + '\n' +
+                "\tcommentCount: " + commentCount + '\n' +
+                "\tsubscriberCount: " + subscriberCount + '\n' +
+                "\thiddenSubscriberCount: " + hiddenSubscriberCount + '\n' +
+                "\tvideoCount: " + videoCount;
+    }
 }
