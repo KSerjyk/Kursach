@@ -1,3 +1,5 @@
+package Controllers;
+
 public class SettingsConfig {
     private static boolean saveCache;
     private static boolean showTime;
