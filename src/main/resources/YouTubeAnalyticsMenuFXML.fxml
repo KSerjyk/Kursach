@@ -14,7 +14,7 @@
             <Label text="YouTube Analytics" />
             <JFXButton fx:id="BackBtnId" text="Back to Main Menu" onMouseClicked="#BackBtnClicked"/>
             <Label text="Choose action:" />
-            <JFXComboBox fx:id="ComboBoxId" promptText="Action" onAction="#ComboBoxAction"/>
+            <JFXComboBox fx:id="ComboBoxId" promptText="Action"/>
             <JFXButton fx:id="applyActionBtn" text="Procced action" onMouseClicked="#applyAction"/>
          </children>
       </VBox>
