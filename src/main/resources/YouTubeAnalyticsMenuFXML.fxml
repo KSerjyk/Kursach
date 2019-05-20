@@ -9,12 +9,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.YouTubeAnalyticsController">
    <children>
-      <VBox fx:id="BackBtnId" alignment="CENTER" layoutX="314.0" layoutY="39.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="314.0" layoutY="39.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="YouTube Analytics" />
-            <JFXButton text="Back to Main Menu" onMouseClicked="#BackBtnClicked"/>
+            <JFXButton fx:id="BackBtnId" text="Back to Main Menu" onMouseClicked="#BackBtnClicked"/>
             <Label text="Choose action:" />
             <JFXComboBox fx:id="ComboBoxId" promptText="Action" onAction="#ComboBoxAction"/>
+            <JFXButton fx:id="applyActionBtn" text="Procced action" onMouseClicked="#applyAction"/>
          </children>
       </VBox>
    </children>
