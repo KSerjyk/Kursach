@@ -14,11 +14,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SettingsMenuController">
    <children>
-      <JFXButton fx:id="SaveBtnId" onMouseClicked="#SaveBtnClicked" text="Save Changes" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
       <VBox layoutX="250.0" layoutY="45.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="40.0" prefWidth="580.0" spacing="20.0">
@@ -55,7 +50,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <CheckBox fx:id="TimeCheckBoxId" mnemonicParsing="false" text="Display the time spent on the task?" />
+            <JFXCheckBox fx:id="TimeCheckBoxId" mnemonicParsing="false" text="Display the time spent on the task?" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -64,5 +59,10 @@
             <Insets left="20.0" top="10.0" />
          </padding>
       </VBox>
+      <JFXButton fx:id="SaveBtnId" onMouseClicked="#SaveBtnClicked" text="Save Changes" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
