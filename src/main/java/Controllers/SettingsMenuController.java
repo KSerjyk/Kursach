@@ -62,5 +62,6 @@ public class SettingsMenuController {
         assert SaveCacheCheckBoxId != null : "fx:id=\"SaveCacheCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         assert TimeCheckBoxId != null : "fx:id=\"TimeCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         SaveBtnId.setDisableVisualFocus(true);
+        
     }
 }
