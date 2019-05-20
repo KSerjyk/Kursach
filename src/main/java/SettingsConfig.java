@@ -1,7 +1,7 @@
 public class SettingsConfig {
-    private boolean saveCache;
-    private boolean showTime;
-    private String path;
+    private static boolean saveCache;
+    private static boolean showTime;
+    private static String path;
 
     public boolean isSaveCache() {
         return saveCache;
@@ -25,14 +25,5 @@ public class SettingsConfig {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    @Override
-    public String toString() {
-        return "SettingsConfig{" +
-                "saveCache=" + saveCache +
-                ", showTime=" + showTime +
-                ", path='" + path + '\'' +
-                '}';
     }
 }

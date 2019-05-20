@@ -43,7 +43,7 @@ public abstract class SaveLoadCache {
     {
         Gson gson = new Gson();
         if(SaveOrLoad) {
-            String json = gson.toJson(obj);
+            String json = new Gson().toJson(obj);
             saveCache(path,json);
         }
         else
