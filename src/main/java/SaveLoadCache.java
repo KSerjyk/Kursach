@@ -16,7 +16,7 @@ public abstract class SaveLoadCache {
         {
             System.out.println(ex.getMessage());
         }
-        System.out.println("SAVED!");
+        System.out.println("Saved!");
     }
 
     public static String loadCache(String path) throws IOException {
@@ -26,7 +26,7 @@ public abstract class SaveLoadCache {
             str = new String(Files.readAllBytes(Paths.get(path)));
         }
         else throw null;
-        System.out.println("LOADED!");
+        System.out.println("Loaded!");
         return str;
     }
 }
