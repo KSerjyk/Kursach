@@ -52,7 +52,7 @@ public class SettingsMenuController {
 
     @FXML
     void SaveBtnClicked(MouseEvent event) {
-
+        System.out.println("Saved Button Pressed");
     }
 
     @FXML
@@ -61,6 +61,6 @@ public class SettingsMenuController {
         assert BackBtnId != null : "fx:id=\"BackBtnId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         assert SaveCacheCheckBoxId != null : "fx:id=\"SaveCacheCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         assert TimeCheckBoxId != null : "fx:id=\"TimeCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
-
+        SaveBtnId.setDisableVisualFocus(true);
     }
 }

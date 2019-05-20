@@ -57,5 +57,6 @@ public class YouTubeAnalyticsController {
         assert BackBtnId != null : "fx:id=\"BackBtnId\" was not injected: check your FXML file 'YouTubeAnalyticsMenuFXML.fxml'.";
         assert ComboBoxId != null : "fx:id=\"ComboBoxId\" was not injected: check your FXML file 'YouTubeAnalyticsMenuFXML.fxml'.";
         ComboBoxId.getItems().addAll("Загальна інформація", "Порівняти канали", "Сортувати канали за даними", "Медіа резонанс", "Порівняти медіа резонанс", "Сортувати по медіа резонансу");
+        BackBtnId.setDisableVisualFocus(true);
     }
 }

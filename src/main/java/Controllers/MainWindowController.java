@@ -50,6 +50,6 @@ public class MainWindowController {
     void initialize() {
         assert AnalyticsBtnId != null : "fx:id=\"AnalyticsBtnId\" was not injected: check your FXML file 'MainMenuFXML.fxml'.";
         assert SettingsBtnId != null : "fx:id=\"SettingsBtnId\" was not injected: check your FXML file 'MainMenuFXML.fxml'.";
-
+        AnalyticsBtnId.setDisableVisualFocus(true);
     }
 }
