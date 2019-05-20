@@ -38,7 +38,6 @@ public class SettingsMenuController {
     @FXML
     void BackBtnClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/MainMenuFXML.fxml"));
-        Stage secondStage = new Stage();
         Stage mainStage = (Stage) BackBtnId.getScene().getWindow();
         mainStage.setTitle("Youtube Analytics");
         mainStage.setScene(new Scene(root, 500, 300));

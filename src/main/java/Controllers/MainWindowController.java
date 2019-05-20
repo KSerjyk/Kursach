@@ -31,23 +31,19 @@ public class MainWindowController {
     @FXML
     void AnalyticsBtnClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/YouTubeAnalyticsMenuFXML.fxml"));
-        Stage secondStage = new Stage();
         Stage mainStage = (Stage) AnalyticsBtnId.getScene().getWindow();
-        mainStage.close();
-        secondStage.setScene(new Scene(root,500, 300));
-        secondStage.setTitle("Analytics window");
-        secondStage.show();
+        mainStage.setScene(new Scene(root,500, 300));
+        mainStage.setTitle("Analytics window");
+        mainStage.show();
     }
 
     @FXML
     void SettingsBtnClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/SettingsMenuFXML.fxml"));
-        Stage secondStage = new Stage();
         Stage mainStage = (Stage) AnalyticsBtnId.getScene().getWindow();
-        mainStage.close();
-        secondStage.setScene(new Scene(root,500, 300));
-        secondStage.setTitle("Settings");
-        secondStage.show();
+        mainStage.setScene(new Scene(root,500, 300));
+        mainStage.setTitle("Settings");
+        mainStage.show();
     }
 
     @FXML
