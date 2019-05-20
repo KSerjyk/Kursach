@@ -1,5 +1,4 @@
-import YoutubeChannel.ChannelStatistic;
-import YoutubeChannel.Response;
+import YoutubeRequest.Response;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
@@ -7,7 +6,8 @@ import com.mashape.unirest.http.Unirest;
 public class Main {
     private static final String ApiKey="AIzaSyAINCiahYJ9DOkX5heKnPYtJyoVm8oqdPc";
     public static void main(String[] args) throws Exception{
-        String url="https://www.googleapis.com/youtube/v3/channels";
+        //channel request
+       /* String url="https://www.googleapis.com/youtube/v3/channels";
         HttpResponse<String> response = Unirest.get(url)
                 .queryString("key", ApiKey)
                 .queryString("part", "snippet, statistics")
@@ -15,6 +15,27 @@ public class Main {
                 .asString();
         //System.out.println(response.getBody());
         Response response1 = new Gson().fromJson(response.getBody(), Response.class);
+        System.out.println(response1);*/
+        //videos search
+        String url="https://www.googleapis.com/youtube/v3/search";
+        HttpResponse<String> response =Unirest.get(url)
+                .queryString("part", "snippet")
+                .queryString("key", ApiKey)
+                .queryString("channelId", "UCf31Gf5nCU8J6eUlr7QSU0w")
+                .queryString("pageToken", "")
+                .queryString("maxResults",50)
+                .queryString("order", "date")
+                .asString();
+        //System.out.println(response.getBody());
+        Response response1 = new Gson().fromJson(response.getBody(), Response.class);
         System.out.println(response1);
+        // get videos comments
+        //String url="https://www.googleapis.com/youtube/v3/videos";
+       /* HttpResponse<String> response = Unirest.get(url)
+                .queryString("key", ApiKey)
+                .queryString("part", "statistics")
+                .queryString("id", "")
+                .asString();
+          System.out.println(response.getBody());*/
     }
 }

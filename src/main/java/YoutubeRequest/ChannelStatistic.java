@@ -1,4 +1,4 @@
-package YoutubeChannel;
+package YoutubeRequest;
 
 public class ChannelStatistic {
     private Long viewCount;
