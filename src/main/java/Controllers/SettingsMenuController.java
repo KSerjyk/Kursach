@@ -3,17 +3,23 @@ package Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class SettingsMenuController {
 
@@ -33,7 +39,10 @@ public class SettingsMenuController {
     private JFXCheckBox SaveCacheCheckBoxId;
 
     @FXML
-    private CheckBox TimeCheckBoxId;
+    private JFXCheckBox TimeCheckBoxId;
+
+    @FXML
+    private JFXTextField cachePathTF;
 
     @FXML
     void BackBtnClicked(MouseEvent event) throws IOException {
@@ -46,13 +55,23 @@ public class SettingsMenuController {
     }
 
     @FXML
-    void CachePathTextId(ActionEvent event) {
-
+    void selectDirectory(MouseEvent event) {
+        /*JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if(fc.showDialog(null, "Вибрати папку") == JFileChooser.APPROVE_OPTION)
+            cachePathTF.setText(fc.getSelectedFile().getPath());*/
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File dir = directoryChooser.showDialog(BackBtnId.getScene().getWindow());
+        if(dir != null)
+            cachePathTF.setText(dir.getAbsolutePath());
     }
 
     @FXML
     void SaveBtnClicked(MouseEvent event) {
-        System.out.println("Saved Button Pressed");
+        SettingsConfig obj = SettingsConfig.getInstance();
+        obj.setPath(cachePathTF.getText());
+        obj.setSaveCache(SaveCacheCheckBoxId.isSelected());
+        obj.setShowTime(TimeCheckBoxId.isSelected());
     }
 
     @FXML
@@ -62,6 +81,8 @@ public class SettingsMenuController {
         assert SaveCacheCheckBoxId != null : "fx:id=\"SaveCacheCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         assert TimeCheckBoxId != null : "fx:id=\"TimeCheckBoxId\" was not injected: check your FXML file 'SettingsMenuFXML.fxml'.";
         SaveBtnId.setDisableVisualFocus(true);
-        
+        SaveCacheCheckBoxId.setSelected(SettingsConfig.getInstance().isSaveCache());
+        TimeCheckBoxId.setSelected(SettingsConfig.getInstance().isShowTime());
+        cachePathTF.setText(SettingsConfig.getInstance().getPath());
     }
 }

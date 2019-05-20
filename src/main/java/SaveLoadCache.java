@@ -40,17 +40,19 @@ public abstract class SaveLoadCache {
         return str;
     }
 
-    public static void LoadSaveSettingsConfig(SettingsConfig obj, String path, boolean SaveOrLoad)
+    public static void LoadSaveSettingsConfig(boolean SaveOrLoad)
     {
         Gson gson = new Gson();
         if(SaveOrLoad) {
-            String json = new Gson().toJson(obj);
-            saveCache(path,json);
+            String json = new Gson().toJson(SettingsConfig.getInstance());
+            saveCache("Settings.aa",json);
         }
         else
         {
-            String json = loadCache(path);
-            obj = gson.fromJson(json,SettingsConfig.class);
+            String json = loadCache("Settings.aa");
+
+            SettingsConfig obj = gson.fromJson(json,SettingsConfig.class);
+            System.out.println(SettingsConfig.getInstance());
         }
     }
 

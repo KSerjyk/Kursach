@@ -1,3 +1,4 @@
+import Controllers.SettingsConfig;
 import YoutubeRequest.Response;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
@@ -42,6 +43,12 @@ public class Main extends Application {
                 .queryString("id", "")
                 .asString();
           System.out.println(response.getBody());*/
+        SaveLoadCache.LoadSaveSettingsConfig(false);
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                SaveLoadCache.LoadSaveSettingsConfig(true);
+            }
+        });
        launch(args);
     }
 
