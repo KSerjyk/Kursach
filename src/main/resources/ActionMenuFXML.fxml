@@ -15,7 +15,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXTextField focusColor="#ff8400" promptText="Set YouTube Channel Id" unFocusColor="RED">
+                  <JFXTextField fx:id="youtubeChannelId" focusColor="#ff8400" promptText="Set YouTube Channel Id" unFocusColor="RED" onKeyReleased="#finishEnter">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -27,7 +27,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXListView fx:id="listViewId" />
+            <JFXListView fx:id="listViewId" prefWidth="300" prefHeight="300"/>
          </children>
       </VBox>
    </children>
