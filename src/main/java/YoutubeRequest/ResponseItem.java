@@ -1,7 +1,7 @@
 package YoutubeRequest;
 
 public class ResponseItem {
-    private String id;
+    public String id;
     private ChannelStatistic statistics;
     private Snippet snippet;
    /* public VideoId getId() {

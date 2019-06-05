@@ -43,7 +43,7 @@ public class YouTubeAnalyticsController {
         Parent root = FXMLLoader.load(getClass().getResource("/MainMenuFXML.fxml"));
         Stage mainStage = (Stage) BackBtnId.getScene().getWindow();
         mainStage.setTitle("Youtube Analytics");
-        mainStage.setScene(new Scene(root, 500, 300));
+        mainStage.setScene(new Scene(root, 400, 400));
         mainStage.setResizable(false);
         mainStage.show();
     }
@@ -62,7 +62,7 @@ public class YouTubeAnalyticsController {
         Stage secondStage = new Stage();
         secondStage.initOwner(mainStage);
         secondStage.setTitle("Youtube Analytics");
-        secondStage.setScene(new Scene(root, 500, 300));
+        secondStage.setScene(new Scene(root, 300, 400));
         secondStage.setResizable(false);
         secondStage.show();
     }

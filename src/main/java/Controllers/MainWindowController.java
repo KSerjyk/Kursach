@@ -41,7 +41,7 @@ public class MainWindowController {
     void SettingsBtnClicked(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/SettingsMenuFXML.fxml"));
         Stage mainStage = (Stage) AnalyticsBtnId.getScene().getWindow();
-        mainStage.setScene(new Scene(root,500, 300));
+        mainStage.setScene(new Scene(root,600, 350));
         mainStage.setTitle("Settings");
         mainStage.show();
     }

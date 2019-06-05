@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class YoutubeChannelInformation {
     private String channelId;
+    private String name;
     private Date dateCreated;
     private Long subscribersCount;
-    private Integer videosCount;
+    private Long videosCount;
     private Long viewCount;
     private Long commentCount;
 
@@ -26,10 +27,18 @@ public class YoutubeChannelInformation {
 
     public void setDateCreated(String dateCreated) {
         try {
-            this.dateCreated = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(dateCreated);
+            this.dateCreated = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.'000Z'").parse(dateCreated);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getSubscribersCount() {
@@ -40,11 +49,11 @@ public class YoutubeChannelInformation {
         this.subscribersCount = subscribersCount;
     }
 
-    public Integer getVideosCount() {
+    public Long getVideosCount() {
         return videosCount;
     }
 
-    public void setVideosCount(Integer videosCount) {
+    public void setVideosCount(Long videosCount) {
         this.videosCount = videosCount;
     }
 

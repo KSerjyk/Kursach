@@ -1,10 +1,10 @@
 package YoutubeRequest;
 
 public class Snippet {
-    String title;
-    String description;
-    String customUrl;
-    String publishedAt;
+    public String title;
+    public String description;
+    public String customUrl;
+    public String publishedAt;
 
     @Override
     public String toString() {
