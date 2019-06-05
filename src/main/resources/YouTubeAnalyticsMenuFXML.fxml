@@ -13,8 +13,8 @@
             <Label text="YouTube Analytics" />
             <Label text="Choose action:" />
             <JFXComboBox fx:id="ComboBoxId" focusColor="RED" promptText="Action" />
-            <JFXButton fx:id="applyActionBtn" onMouseClicked="#applyAction" text="Procced action" />
-            <JFXButton fx:id="BackBtnId" buttonType="RAISED" ellipsisString="" onMouseClicked="#BackBtnClicked" ripplerFill="RED" text="Back to Main Menu" />
+            <JFXButton fx:id="applyActionBtn" onMouseClicked="#applyAction" stylesheets="@style.css" text="Procced action" />
+            <JFXButton fx:id="BackBtnId" buttonType="RAISED" ellipsisString="" onMouseClicked="#BackBtnClicked" ripplerFill="RED" stylesheets="@style.css" text="Back to Main Menu" />
          </children>
       </VBox>
    </children>

@@ -29,12 +29,12 @@
                </font>
             </Label>
             <JFXCheckBox fx:id="SaveCacheCheckBoxId" text="Save cache?" />
-            <JFXButton text="Cache path..." onMouseClicked="#selectDirectory">
+            <JFXButton onMouseClicked="#selectDirectory" text="Cache path...">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="cachePathTF" disable="true" />
+            <JFXTextField fx:id="cachePathTF" disable="true" focusColor="RED" />
             <Label text="Time taken to complete:">
                <font>
                   <Font size="18.0" />
@@ -49,12 +49,12 @@
             <Insets left="20.0" top="10.0" />
          </padding>
       </VBox>
-      <JFXButton fx:id="SaveBtnId" onMouseClicked="#SaveBtnClicked" ripplerFill="RED" text="Save Changes" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <JFXButton fx:id="SaveBtnId" onMouseClicked="#SaveBtnClicked" ripplerFill="RED" stylesheets="@style.css" text="Save Changes" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="BackBtnId" onMouseClicked="#BackBtnClicked" ripplerFill="RED" text="Back To Main Menu" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <JFXButton fx:id="BackBtnId" onMouseClicked="#BackBtnClicked" ripplerFill="RED" stylesheets="@style.css" text="Back To Main Menu" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
             <Font size="18.0" />
          </font>
