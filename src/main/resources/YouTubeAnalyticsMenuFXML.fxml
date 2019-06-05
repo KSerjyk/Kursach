@@ -6,16 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.YouTubeAnalyticsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.YouTubeAnalyticsController">
    <children>
       <VBox alignment="CENTER" layoutX="314.0" layoutY="39.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="YouTube Analytics" />
-            <JFXButton fx:id="BackBtnId" text="Back to Main Menu" onMouseClicked="#BackBtnClicked"/>
             <Label text="Choose action:" />
-            <JFXComboBox fx:id="ComboBoxId" promptText="Action"/>
-            <JFXButton fx:id="applyActionBtn" text="Procced action" onMouseClicked="#applyAction"/>
+            <JFXComboBox fx:id="ComboBoxId" focusColor="RED" promptText="Action" />
+            <JFXButton fx:id="applyActionBtn" onMouseClicked="#applyAction" text="Procced action" />
+            <JFXButton fx:id="BackBtnId" buttonType="RAISED" ellipsisString="" onMouseClicked="#BackBtnClicked" ripplerFill="RED" text="Back to Main Menu" />
          </children>
       </VBox>
    </children>
