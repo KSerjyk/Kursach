@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainWindowController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
@@ -16,8 +15,8 @@
          <children>
             <Label text="Hello My Friend!　こんにちは、友よ!" />
             <Label text="Beta V1.0" />
-            <JFXButton fx:id="AnalyticsBtnId" onMouseClicked="#AnalyticsBtnClicked" text="YouTube Analytics" />
-            <JFXButton fx:id="SettingsBtnId" onMouseClicked="#SettingsBtnClicked" prefWidth="114.0" text="Settings" />
+            <JFXButton fx:id="AnalyticsBtnId" onMouseClicked="#AnalyticsBtnClicked" ripplerFill="RED" text="YouTube Analytics" />
+            <JFXButton fx:id="SettingsBtnId" onMouseClicked="#SettingsBtnClicked" prefWidth="114.0" ripplerFill="RED" text="Settings" />
          </children>
       </VBox>
    </children>
