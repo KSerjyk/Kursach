@@ -28,6 +28,11 @@
                </children>
             </HBox>
             <JFXListView fx:id="listViewId" prefWidth="300" prefHeight="300"/>
+            <JFXButton onMouseClicked="#proceedToTask" text="Proceed">
+               <font>
+                  <Font size="18.0"/>
+               </font>
+            </JFXButton>
          </children>
       </VBox>
    </children>

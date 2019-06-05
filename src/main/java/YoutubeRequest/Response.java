@@ -5,6 +5,18 @@ public class Response {
     private PageInfo pageInfo;
     private ResponseItem[] items;
 
+    public String getNextPageToken() {
+        return nextPageToken;
+    }
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public ResponseItem[] getItems() {
+        return items;
+    }
+
     @Override
     public String toString() {
         String str = "nextPageToken: " + nextPageToken + '\n' + pageInfo +'\n';
