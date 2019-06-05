@@ -1,9 +1,23 @@
 package Controllers;
 
 public class SettingsConfig {
-    private static boolean saveCache;
-    private static boolean showTime;
-    private static String path;
+
+    private static SettingsConfig INSTANCE;
+
+    private boolean saveCache;
+    private boolean showTime;
+    private String path = "Cahche\\";
+
+    private SettingsConfig(){
+        INSTANCE = this;
+    }
+
+    public static SettingsConfig getInstance(){
+        if(INSTANCE == null)
+            INSTANCE = new SettingsConfig();
+
+        return INSTANCE;
+    }
 
     public boolean isSaveCache() {
         return saveCache;
@@ -27,5 +41,14 @@ public class SettingsConfig {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public String toString() {
+        return "SettingsConfig{" +
+                "saveCache=" + saveCache +
+                ", showTime=" + showTime +
+                ", path='" + path + '\'' +
+                '}';
     }
 }
