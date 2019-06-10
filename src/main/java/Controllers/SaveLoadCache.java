@@ -1,3 +1,5 @@
+package Controllers;
+
 import Controllers.SettingsConfig;
 import com.google.gson.Gson;
 

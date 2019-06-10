@@ -1,8 +1,4 @@
-import Controllers.SettingsConfig;
-import YoutubeRequest.Response;
-import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
+import Controllers.SaveLoadCache;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +19,7 @@ public class Main extends Application {
         Response response1 = new Gson().fromJson(response.getBody(), Response.class);
         System.out.println(response1);*/
         //videos search
-       /* String url="https://www.googleapis.com/youtube/v3/search";
+       /*String url="https://www.googleapis.com/youtube/v3/search";
         HttpResponse<String> response =Unirest.get(url)
                 .queryString("part", "snippet")
                 .queryString("key", ApiKey)

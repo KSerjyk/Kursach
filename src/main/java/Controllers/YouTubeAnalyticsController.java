@@ -57,6 +57,7 @@ public class YouTubeAnalyticsController {
         ComboboxItem item = ComboBoxId.getValue();
         actionMenuController.maxChannels = item.getMax();
         actionMenuController.minChannels = item.getMin();
+        actionMenuController.comments = item.isComment();
         Parent root = loader.getRoot();
         Stage mainStage = (Stage) applyActionBtn.getScene().getWindow();
         Stage secondStage = new Stage();
@@ -69,7 +70,7 @@ public class YouTubeAnalyticsController {
 
     @FXML
     void initialize() {
-        ComboBoxId.getItems().addAll(new ComboboxItem("Загальна інформація", 1, 1), new ComboboxItem("Порівняти канали", 2, 2), new ComboboxItem("Сортувати канали за даними", 1, 999999), new ComboboxItem("Медіа резонанс", 1, 1), new ComboboxItem("Порівняти медіа резонанс", 2, 2), new ComboboxItem("Сортувати по медіа резонансу", 1, 999999));
+        ComboBoxId.getItems().addAll(new ComboboxItem("Загальна інформація", 1, 1, false), new ComboboxItem("Порівняти канали", 2, 2, false), new ComboboxItem("Сортувати канали за даними", 1, 999999, false), new ComboboxItem("Медіа резонанс", 1, 1, true), new ComboboxItem("Порівняти медіа резонанс", 2, 2, true), new ComboboxItem("Сортувати по медіа резонансу", 1, 999999,true));
         ComboBoxId.getSelectionModel().selectFirst();
         BackBtnId.setDisableVisualFocus(true);
 

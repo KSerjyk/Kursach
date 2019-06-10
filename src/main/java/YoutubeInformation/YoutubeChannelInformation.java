@@ -12,6 +12,15 @@ public class YoutubeChannelInformation {
     private Long videosCount;
     private Long viewCount;
     private Long commentCount;
+    private boolean getComments;
+
+    public boolean isGetComments() {
+        return getComments;
+    }
+
+    public void setGetComments(boolean getComments) {
+        this.getComments = getComments;
+    }
 
     public String getChannelId() {
         return channelId;
