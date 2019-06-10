@@ -80,12 +80,13 @@ public class ActionMenuController {
                         listViewId.getSelectionModel().getSelectedItems()) {
                     channelsId.add(id);
                 }
-                TaskViewer taskViewer = new TaskViewer((Stage) plusBtnId.getScene().getWindow(), channelsId, comments);
+                TaskViewer taskViewer = new TaskViewer(channelsId, comments);
                 try {
-                    taskViewer.run();
+                    taskViewer.call();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                progress.setProgress(0);
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You must select at least " + minChannels + " ID but don't more than " + maxChannels);

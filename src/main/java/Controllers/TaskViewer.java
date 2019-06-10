@@ -21,23 +21,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TaskViewer extends Thread {
+public class TaskViewer extends Task {
     private static final String ApiKey = "AIzaSyBz_prV0e25vifnJpImJhULCkRBDn1V3HU";
     private ObservableList<YoutubeChannelInformation> channelInformations = FXCollections.observableArrayList();
     private final TableView<YoutubeChannelInformation> tableView = new TableView<>();
-    private Stage ownerStage;
     private List<String> channelsIDs;
     private boolean fieldComment;
 
-    public TaskViewer(Stage ownerStage, List<String> channelsIDs, boolean fieldComment) {
-        this.ownerStage = ownerStage;
+    public TaskViewer(List<String> channelsIDs, boolean fieldComment) {
         this.channelsIDs = channelsIDs;
         this.fieldComment = fieldComment;
     }
 
     @Override
-    public void run() {
-        ShowForm();
+    protected Object call() throws Exception {
+        try {
+            ShowForm();
+            return true;
+        }catch (Exception e){}
+        return false;
     }
 
     private void ShowForm() {
@@ -54,7 +56,6 @@ public class TaskViewer extends Thread {
         StackPane root = new StackPane();
         root.getChildren().add(tableView);
         Stage secondaryStage = new Stage();
-        ownerStage.close();
         secondaryStage.setTitle("Information");
         Scene scene = new Scene(root, 800, 450);
         secondaryStage.setScene(scene);
@@ -93,19 +94,19 @@ public class TaskViewer extends Thread {
         String url = "https://www.googleapis.com/youtube/v3/channels";
         for (String id :
                 channelIds) {
-            if(!new File(id+".txt").exists()) {
+            if(!new File(SettingsConfig.getInstance().getPath()+'\\'+id+".txt").exists()) {
                 HttpResponse<String> response = Unirest.get(url)
                         .queryString("key", ApiKey)
                         .queryString("part", "snippet, statistics")
                         .queryString("id", id)
                         .asString();
                 Response response1 = new Gson().fromJson(response.getBody(), Response.class);
-                convertResponseClass(response1);
+                try{convertResponseClass(response1);}catch (Exception e){ e.printStackTrace();}
                 if (comments) {
                     getChannelVideos(id);
                 }
             } else {
-                YoutubeChannelInformation channelInformation = new Gson().fromJson(SaveLoadCache.loadCache(id+".txt"), YoutubeChannelInformation.class);
+                YoutubeChannelInformation channelInformation = new Gson().fromJson(SaveLoadCache.loadCache(SettingsConfig.getInstance().getPath()+'\\'+id+".txt"), YoutubeChannelInformation.class);
                 channelInformations.add(channelInformation);
                 if(!channelInformation.isGetComments())
                     getChannelVideos(channelInformation.getChannelId());
@@ -129,6 +130,7 @@ public class TaskViewer extends Thread {
                     .asString();
             response1 = new Gson().fromJson(response.getBody(), ResponseForSearch.class);
             //System.out.println(response1);
+            try{
             for (ResponseItemSearch item :
                     response1.getItems()) {
                 if (item != null)
@@ -137,9 +139,11 @@ public class TaskViewer extends Thread {
                     System.out.println("ItemIsNull");
                 }
             }
+            }catch (Exception e){}
             pageToken = response1.getNextPageToken();
         } while (response1.getItems().length != 0);
         channelInformations.get(channelInformations.size() - 1).setCommentCount(getCommentCount(videoIds));
+        channelInformations.get(channelInformations.size() - 1).setGetComments(true);
     }
 
     private void convertResponseClass(Response r) {
@@ -152,7 +156,7 @@ public class TaskViewer extends Thread {
         channelInformation.setName(r.getItems()[0].getSnippet().title);
         channelInformations.add(channelInformation);
         if (SettingsConfig.getInstance().isSaveCache()) {
-            SaveLoadCache.saveCache(channelInformation.getChannelId()+".txt", new Gson().toJson(channelInformation));
+            SaveLoadCache.saveCache(SettingsConfig.getInstance().getPath()+'\\'+channelInformation.getChannelId()+".txt", new Gson().toJson(channelInformation));
         }
     }
 
@@ -171,7 +175,7 @@ public class TaskViewer extends Thread {
                 comments += r.getItems()[0].getStatistics().getCommentCount();
                 System.out.println(r.getItems()[0].getStatistics().getCommentCount());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
             }
         }
         return comments;
