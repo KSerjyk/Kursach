@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class YouTubeAnalyticsController {
@@ -62,6 +63,7 @@ public class YouTubeAnalyticsController {
         Stage mainStage = (Stage) applyActionBtn.getScene().getWindow();
         Stage secondStage = new Stage();
         secondStage.initOwner(mainStage);
+        secondStage.initModality(Modality.WINDOW_MODAL);
         secondStage.setTitle("Youtube Analytics");
         secondStage.setScene(new Scene(root, 300, 400));
         secondStage.setResizable(false);
@@ -70,7 +72,7 @@ public class YouTubeAnalyticsController {
 
     @FXML
     void initialize() {
-        ComboBoxId.getItems().addAll(new ComboboxItem("Загальна інформація", 1, 1, false), new ComboboxItem("Порівняти канали", 2, 2, false), new ComboboxItem("Сортувати канали за даними", 1, 999999, false), new ComboboxItem("Медіа резонанс", 1, 1, true), new ComboboxItem("Порівняти медіа резонанс", 2, 2, true), new ComboboxItem("Сортувати по медіа резонансу", 1, 999999,true));
+        ComboBoxId.getItems().addAll(new ComboboxItem("General information", 1, 1, false), new ComboboxItem("Compare channels", 2, 2, false), new ComboboxItem("Sort channels by data", 1, 999999, false), new ComboboxItem("Media resonance", 1, 1, true), new ComboboxItem("Compare media resonance", 2, 2, true), new ComboboxItem("Sort by media resonance", 1, 999999,true));
         ComboBoxId.getSelectionModel().selectFirst();
         BackBtnId.setDisableVisualFocus(true);
 

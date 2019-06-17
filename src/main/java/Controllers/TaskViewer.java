@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TaskViewer extends Task {
+public class TaskViewer {
     private static final String ApiKey = "AIzaSyBz_prV0e25vifnJpImJhULCkRBDn1V3HU";
     private ObservableList<YoutubeChannelInformation> channelInformations = FXCollections.observableArrayList();
-    private final TableView<YoutubeChannelInformation> tableView = new TableView<>();
+    public TableView<YoutubeChannelInformation> tableView = new TableView<>();
     private List<String> channelsIDs;
     private boolean fieldComment;
 
@@ -33,17 +33,7 @@ public class TaskViewer extends Task {
         this.fieldComment = fieldComment;
     }
 
-    @Override
-    protected Object call() throws Exception {
-        try {
-            ShowForm();
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
-    }
-
-    private void ShowForm() {
+    public void ShowForm() {
         createTable();
         if (fieldComment)
             addCommentColumn();
@@ -53,14 +43,13 @@ public class TaskViewer extends Task {
             e.printStackTrace();
         }
         tableView.setItems(channelInformations);
-
-        StackPane root = new StackPane();
+        /*StackPane root = new StackPane();
         root.getChildren().add(tableView);
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Information");
         Scene scene = new Scene(root, 800, 450);
         secondaryStage.setScene(scene);
-        secondaryStage.show();
+        secondaryStage.show();*/
     }
 
     private void createTable() {

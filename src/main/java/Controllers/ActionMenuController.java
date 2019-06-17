@@ -11,14 +11,17 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ActionMenuController {
@@ -75,23 +78,24 @@ public class ActionMenuController {
         if (listViewId.getItems().size() >= minChannels) {
             if (listViewId.getSelectionModel().getSelectedItems().size() >= minChannels && listViewId.getSelectionModel().getSelectedItems().size() <= maxChannels) {
                 progress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
-                List<String> channelsId = new ArrayList<>();
-                for (String id :
-                        listViewId.getSelectionModel().getSelectedItems()) {
-                    channelsId.add(id);
-                }
+                final List<String> channelsId = new ArrayList<>();
+                channelsId.addAll(listViewId.getSelectionModel().getSelectedItems());
                 final TaskViewer taskViewer = new TaskViewer(channelsId, comments);
-                new Runnable() {
+                Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        try {
-                            taskViewer.call();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        taskViewer.ShowForm();
+                        progress.setProgress(0);
                     }
-                }.run();
-                progress.setProgress(0);
+                };
+                thread.start();
+                StackPane root = new StackPane();
+                root.getChildren().add(taskViewer.tableView);
+                Stage secondaryStage = new Stage();
+                secondaryStage.setTitle("Information");
+                Scene scene = new Scene(root, 800, 300);
+                secondaryStage.setScene(scene);
+                secondaryStage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You must select at least " + minChannels + " ID but don't more than " + maxChannels);
                 alert.show();
