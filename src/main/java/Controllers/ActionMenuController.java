@@ -85,17 +85,22 @@ public class ActionMenuController {
                     @Override
                     public void run() {
                         taskViewer.ShowForm();
-                        progress.setProgress(0);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                StackPane root = new StackPane();
+                                root.getChildren().add(taskViewer.tableView);
+                                Stage secondaryStage = new Stage();
+                                secondaryStage.setTitle("Information");
+                                Scene scene = new Scene(root, 800, 300);
+                                secondaryStage.setScene(scene);
+                                secondaryStage.show();
+                                progress.setProgress(0);
+                            }
+                        });
                     }
                 };
                 thread.start();
-                StackPane root = new StackPane();
-                root.getChildren().add(taskViewer.tableView);
-                Stage secondaryStage = new Stage();
-                secondaryStage.setTitle("Information");
-                Scene scene = new Scene(root, 800, 300);
-                secondaryStage.setScene(scene);
-                secondaryStage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You must select at least " + minChannels + " ID but don't more than " + maxChannels);
                 alert.show();
