@@ -51,7 +51,7 @@ public class ActionMenuController {
             listViewId.getItems().add(youtubeChannelId.getText());
             youtubeChannelId.setText("");
         }
-        if(maxChannels > 1)
+        if (maxChannels > 1)
             listViewId.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -66,7 +66,7 @@ public class ActionMenuController {
                 youtubeChannelId.setText("");
             }
         }
-        if(maxChannels > 1)
+        if (maxChannels > 1)
             listViewId.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -74,21 +74,25 @@ public class ActionMenuController {
     void proceedToTask(MouseEvent event) {
         if (listViewId.getItems().size() >= minChannels) {
             if (listViewId.getSelectionModel().getSelectedItems().size() >= minChannels && listViewId.getSelectionModel().getSelectedItems().size() <= maxChannels) {
-                List<String> channelsId = new ArrayList<>();
                 progress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
+                List<String> channelsId = new ArrayList<>();
                 for (String id :
                         listViewId.getSelectionModel().getSelectedItems()) {
                     channelsId.add(id);
                 }
-                TaskViewer taskViewer = new TaskViewer(channelsId, comments);
-                try {
-                    taskViewer.call();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                final TaskViewer taskViewer = new TaskViewer(channelsId, comments);
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            taskViewer.call();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.run();
                 progress.setProgress(0);
-            }
-            else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You must select at least " + minChannels + " ID but don't more than " + maxChannels);
                 alert.show();
             }
