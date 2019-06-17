@@ -62,10 +62,11 @@ public class YouTubeAnalyticsController {
         Parent root = loader.getRoot();
         Stage mainStage = (Stage) applyActionBtn.getScene().getWindow();
         Stage secondStage = new Stage();
+        secondStage.setResizable(false);
         secondStage.initOwner(mainStage);
         secondStage.initModality(Modality.WINDOW_MODAL);
         secondStage.setTitle("Youtube Analytics");
-        secondStage.setScene(new Scene(root, 300, 400));
+        secondStage.setScene(new Scene(root, 290, 390));
         secondStage.setResizable(false);
         secondStage.show();
     }
