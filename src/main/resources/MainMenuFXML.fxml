@@ -30,8 +30,8 @@
                   <Font size="18.0" />
                </font></Label>
             <Label text="Beta V1.0" />
-            <JFXButton fx:id="AnalyticsBtnId" onMouseClicked="#AnalyticsBtnClicked" ripplerFill="RED" stylesheets="@style.css" text="YouTube Analytics" />
-            <JFXButton fx:id="SettingsBtnId" onMouseClicked="#SettingsBtnClicked" prefWidth="114.0" ripplerFill="RED" stylesheets="@style.css" text="Settings" />
+            <JFXButton fx:id="AnalyticsBtnId" onMouseClicked="#AnalyticsBtnClicked" ripplerFill="#fff0f0" stylesheets="@style.css" text="YouTube Analytics" />
+            <JFXButton fx:id="SettingsBtnId" onMouseClicked="#SettingsBtnClicked" prefWidth="114.0" ripplerFill="#fff0f0" stylesheets="@style.css" text="Settings" />
          </children>
       </VBox>
    </children>
