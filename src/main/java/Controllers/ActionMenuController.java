@@ -72,14 +72,13 @@ public class ActionMenuController {
         if (maxChannels > 1)
             listViewId.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
-    Timer timer;
+    private Timer timer;
     @FXML
     void proceedToTask(MouseEvent event) {
         if (listViewId.getItems().size() >= minChannels) {
             if (listViewId.getSelectionModel().getSelectedItems().size() >= minChannels && listViewId.getSelectionModel().getSelectedItems().size() <= maxChannels) {
                 progress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
-                final List<String> channelsId = new ArrayList<>();
-                channelsId.addAll(listViewId.getSelectionModel().getSelectedItems());
+                final List<String> channelsId = new ArrayList<>(listViewId.getSelectionModel().getSelectedItems());
                 final SettingsConfig settingsConfig = SettingsConfig.getInstance();
                 if(settingsConfig.isShowTime())
                     MyTimer();
@@ -128,6 +127,7 @@ public class ActionMenuController {
     private long starttime;
 
     private void MyTimer() {
+        secondspassed = 0;
         timer = new Timer();
         starttime=System.currentTimeMillis();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -135,8 +135,7 @@ public class ActionMenuController {
             public void run() {
                 try {
                     TimeUnit.MILLISECONDS.sleep(1);
-                    long timepassed=System.currentTimeMillis()-starttime;
-                    long milisecondspassed=timepassed;
+                    long milisecondspassed=System.currentTimeMillis()-starttime;
                     if (milisecondspassed >= 1000) {
                         milisecondspassed = 0;
                         starttime = System.currentTimeMillis();

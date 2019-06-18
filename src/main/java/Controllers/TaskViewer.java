@@ -8,25 +8,22 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TaskViewer {
+class TaskViewer {
     private static final String ApiKey = "AIzaSyBz_prV0e25vifnJpImJhULCkRBDn1V3HU";
     private ObservableList<YoutubeChannelInformation> channelInformations = FXCollections.observableArrayList();
     public TableView<YoutubeChannelInformation> tableView = new TableView<>();
     private List<String> channelsIDs;
     private boolean fieldComment;
+    private SettingsConfig settingsConfig = SettingsConfig.getInstance();
 
     public TaskViewer(List<String> channelsIDs, boolean fieldComment) {
         this.channelsIDs = channelsIDs;
@@ -43,13 +40,6 @@ public class TaskViewer {
             e.printStackTrace();
         }
         tableView.setItems(channelInformations);
-        /*StackPane root = new StackPane();
-        root.getChildren().add(tableView);
-        Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Information");
-        Scene scene = new Scene(root, 800, 450);
-        secondaryStage.setScene(scene);
-        secondaryStage.show();*/
     }
 
     private void createTable() {
@@ -84,32 +74,32 @@ public class TaskViewer {
         String url = "https://www.googleapis.com/youtube/v3/channels";
         for (String id :
                 channelIds) {
-            if (!new File(SettingsConfig.getInstance().getPath() + '\\' + id + ".txt").exists()) {
+            if(new File(settingsConfig.getPath()+'\\'+id+".txt").exists()){
+                if(settingsConfig.isSaveCache()){
+                    String json = SaveLoadCache.loadCache(settingsConfig.getPath()+'\\'+id+".txt");
+                    YoutubeChannelInformation information = new Gson().fromJson(json, YoutubeChannelInformation.class);
+                    channelInformations.add(information);
+                    if(comments)
+                        if(!information.isGetComments())
+                            getChannelVideos(information.getChannelId());
+                }
+            }else {
                 HttpResponse<String> response = Unirest.get(url)
                         .queryString("key", ApiKey)
                         .queryString("part", "snippet, statistics")
                         .queryString("id", id)
                         .asString();
                 Response response1 = new Gson().fromJson(response.getBody(), Response.class);
-                try {
-                    convertResponseClass(response1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                convertResponseClass(response1);
                 if (comments) {
                     getChannelVideos(id);
                 }
-            } else {
-                YoutubeChannelInformation channelInformation = new Gson().fromJson(SaveLoadCache.loadCache(SettingsConfig.getInstance().getPath() + '\\' + id + ".txt"), YoutubeChannelInformation.class);
-                channelInformations.add(channelInformation);
-                if (!channelInformation.isGetComments())
-                    getChannelVideos(channelInformation.getChannelId());
             }
         }
     }
 
     private void getChannelVideos(String channelId) throws UnirestException {
-        ResponseForSearch response1 = null;
+        ResponseForSearch response1;
         String pageToken = "";
         List<String> videoIds = new ArrayList<>();
         do {
@@ -133,12 +123,14 @@ public class TaskViewer {
                         System.out.println("ItemIsNull");
                     }
                 }
-            } catch (Exception e) {
-            }
+            }catch (Exception e){}
             pageToken = response1.getNextPageToken();
         } while (response1.getItems().length != 0);
-        channelInformations.get(channelInformations.size() - 1).setCommentCount(getCommentCount(videoIds));
-        channelInformations.get(channelInformations.size() - 1).setGetComments(true);
+        YoutubeChannelInformation information = channelInformations.get(channelInformations.size() - 1);
+        information.setCommentCount(getCommentCount(videoIds));
+        information.setGetComments(true);
+        if(settingsConfig.isSaveCache())
+            SaveLoadCache.saveCache(settingsConfig.getPath()+'\\'+information.getChannelId()+".txt", new Gson().toJson(information));
     }
 
     private void convertResponseClass(Response r) {
@@ -157,7 +149,7 @@ public class TaskViewer {
 
     private Long getCommentCount(List<String> videoIds) throws UnirestException {
         String url = "https://www.googleapis.com/youtube/v3/videos";
-        Long comments = Long.valueOf(0);
+        Long comments = 0L;
         for (String videoId :
                 videoIds) {
             HttpResponse<String> response = Unirest.get(url)
