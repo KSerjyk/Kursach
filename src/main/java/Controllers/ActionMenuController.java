@@ -72,22 +72,21 @@ public class ActionMenuController {
         if (maxChannels > 1)
             listViewId.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
-
+    Timer timer;
     @FXML
     void proceedToTask(MouseEvent event) {
-        float timePass = 0;
         if (listViewId.getItems().size() >= minChannels) {
             if (listViewId.getSelectionModel().getSelectedItems().size() >= minChannels && listViewId.getSelectionModel().getSelectedItems().size() <= maxChannels) {
                 progress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
                 final List<String> channelsId = new ArrayList<>();
                 channelsId.addAll(listViewId.getSelectionModel().getSelectedItems());
-                final TaskViewer taskViewer = new TaskViewer(channelsId, comments);
-                final Timer timer = new Timer();
-                starttime=System.currentTimeMillis();
-                timer.scheduleAtFixedRate(timerTask, 0, 100);
+                final SettingsConfig settingsConfig = SettingsConfig.getInstance();
+                if(settingsConfig.isShowTime())
+                    MyTimer();
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
+                        final TaskViewer taskViewer = new TaskViewer(channelsId, comments);
                         taskViewer.ShowForm();
                         Platform.runLater(new Runnable() {
                             @Override
@@ -100,7 +99,8 @@ public class ActionMenuController {
                                 secondaryStage.setScene(scene);
                                 secondaryStage.show();
                                 progress.setProgress(0);
-                                timer.cancel();
+                                if(settingsConfig.isShowTime())
+                                    timer.cancel();
                             }
                         });
                     }
@@ -124,11 +124,15 @@ public class ActionMenuController {
             timePassed.setVisible(false);
     }
 
-    long secondspassed=0;
-    long starttime;
-    TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
+    private long secondspassed=0;
+    private long starttime;
+
+    private void MyTimer() {
+        timer = new Timer();
+        starttime=System.currentTimeMillis();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
                 try {
                     TimeUnit.MILLISECONDS.sleep(1);
                     long timepassed=System.currentTimeMillis()-starttime;
@@ -151,27 +155,6 @@ public class ActionMenuController {
                     e.printStackTrace();
                 }
             }
-    };
-
-    private void MyTimer(boolean x) {
-        long secondspassed=0;
-        long starttime=System.currentTimeMillis();
-        System.out.println("Timer:");
-        while(x)
-        {
-            try {
-                TimeUnit.MILLISECONDS.sleep(1);
-            long timepassed=System.currentTimeMillis()-starttime;
-            long milisecondspassed=timepassed;
-            if (milisecondspassed >= 1000) {
-                milisecondspassed = 0;
-                starttime = System.currentTimeMillis();
-            }
-            if((milisecondspassed%1000)==0)
-                secondspassed++;
-            timePassed.setText(secondspassed+"."+milisecondspassed);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }}
+        }, 0, 100);
+    }
 }
