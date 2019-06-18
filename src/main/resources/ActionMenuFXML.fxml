@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ActionMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="colo: #eaeae;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ActionMenuController">
    <children>
       <VBox alignment="CENTER" layoutX="100.0" layoutY="47.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +22,7 @@
                         <Font size="18.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="plusBtnId" onMouseClicked="#PlusBtnClicked" ripplerFill="RED" text="+" textFill="#009e15">
+                  <JFXButton fx:id="plusBtnId" onMouseClicked="#PlusBtnClicked" ripplerFill="RED" style="-fx-border-color: red; -fx-border-width: 0.5; -fx-border-radius: 10; -fx-background-radius: 10;" text="+" textFill="#009e15">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -30,12 +30,12 @@
                </children>
             </HBox>
             <JFXListView fx:id="listViewId" prefHeight="300" prefWidth="300" />
-            <JFXButton alignment="CENTER" onMouseClicked="#proceedToTask" prefWidth="300.0" ripplerFill="RED" stylesheets="@style.css" text="Proceed">
+            <JFXButton alignment="CENTER" onMouseClicked="#proceedToTask" prefWidth="300.0" ripplerFill="#fff0f0" stylesheets="@style.css" text="Proceed">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXProgressBar fx:id="progress" prefHeight="40.0" prefWidth="300.0" progress="0.0" secondaryProgress="0.5">
+            <JFXProgressBar fx:id="progress" prefHeight="40.0" prefWidth="300.0" progress="0.0" secondaryProgress="0.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

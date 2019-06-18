@@ -45,7 +45,7 @@ public class SettingsMenuController {
         Parent root = FXMLLoader.load(getClass().getResource("/MainMenuFXML.fxml"));
         Stage mainStage = (Stage) BackBtnId.getScene().getWindow();
         mainStage.setTitle("Youtube Analytics");
-        mainStage.setScene(new Scene(root, 500, 300));
+        mainStage.setScene(new Scene(root, 400, 400));
         mainStage.setResizable(false);
         mainStage.show();
     }
