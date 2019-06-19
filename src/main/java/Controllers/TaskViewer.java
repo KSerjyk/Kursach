@@ -74,16 +74,28 @@ class TaskViewer {
         String url = "https://www.googleapis.com/youtube/v3/channels";
         for (String id :
                 channelIds) {
-            if(new File(settingsConfig.getPath()+'\\'+id+".txt").exists()){
-                if(settingsConfig.isSaveCache()){
-                    String json = SaveLoadCache.loadCache(settingsConfig.getPath()+'\\'+id+".txt");
+            if (settingsConfig.isSaveCache()) {
+                if (new File(settingsConfig.getPath() + '\\' + id + ".txt").exists()) {
+                    String json = SaveLoadCache.loadCache(settingsConfig.getPath() + '\\' + id + ".txt");
                     YoutubeChannelInformation information = new Gson().fromJson(json, YoutubeChannelInformation.class);
                     channelInformations.add(information);
-                    if(comments)
-                        if(!information.isGetComments())
+                    if (comments)
+                        if (!information.isGetComments())
                             getChannelVideos(information.getChannelId());
                 }
-            }else {
+                else{
+                    HttpResponse<String> response = Unirest.get(url)
+                            .queryString("key", ApiKey)
+                            .queryString("part", "snippet, statistics")
+                            .queryString("id", id)
+                            .asString();
+                    Response response1 = new Gson().fromJson(response.getBody(), Response.class);
+                    convertResponseClass(response1);
+                    if (comments) {
+                        getChannelVideos(id);
+                    }
+                }
+            } else {
                 HttpResponse<String> response = Unirest.get(url)
                         .queryString("key", ApiKey)
                         .queryString("part", "snippet, statistics")
@@ -123,14 +135,15 @@ class TaskViewer {
                         System.out.println("ItemIsNull");
                     }
                 }
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
             pageToken = response1.getNextPageToken();
         } while (response1.getItems().length != 0);
         YoutubeChannelInformation information = channelInformations.get(channelInformations.size() - 1);
         information.setCommentCount(getCommentCount(videoIds));
         information.setGetComments(true);
-        if(settingsConfig.isSaveCache())
-            SaveLoadCache.saveCache(settingsConfig.getPath()+'\\'+information.getChannelId()+".txt", new Gson().toJson(information));
+        if (settingsConfig.isSaveCache())
+            SaveLoadCache.saveCache(settingsConfig.getPath() + '\\' + information.getChannelId() + ".txt", new Gson().toJson(information));
     }
 
     private void convertResponseClass(Response r) {
